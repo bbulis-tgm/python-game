@@ -8,6 +8,9 @@ class Controller(QtWidgets.QWidget):
     counter = 0
 
     def __init__(self):
+        """
+        Methode setzte das button Array zu anfangs
+        """
         super(Controller, self).__init__()
         self.form = uic.loadUi('gui.ui', self)
         self.model = Model(15, 0, 0, 0, 0)
@@ -23,6 +26,9 @@ class Controller(QtWidgets.QWidget):
         self.new_game()
 
     def print_random_numbers(self):
+        """
+        Methode gibt 15 zufällig angeordnete Zahlen an die Buttons aus
+        """
         game_list = self.model.get_game_numbers()
         random.shuffle(game_list)
 
@@ -35,6 +41,9 @@ class Controller(QtWidgets.QWidget):
             button.clicked.connect(lambda checked, nr=number, btn=button: self.button_click_event(nr, btn))
 
     def button_click_event(self, nr, btn):
+        """
+        Methode empfängt die Signale wenn ein Button geklickt wird
+        """
         if nr == self.counter:
             self.counter += 1
             self.richtig(btn)
@@ -47,6 +56,9 @@ class Controller(QtWidgets.QWidget):
             self.falsch()
 
     def repaint_ui(self):
+        """
+        Methode setzte alle Labels in der UI neu
+        """
         self.form.label_offen_punkte.setText(str(self.model.get_offen()))
         self.form.label_koorekt_punkte.setText(str(self.model.get_korrekt()))
         self.form.label_falsch_punkte.setText(str(self.model.get_falsch()))
@@ -54,12 +66,18 @@ class Controller(QtWidgets.QWidget):
         self.form.label_spiele_punkte.setText(str(self.model.get_spiele()))
 
     def new_game(self):
+        """
+        Method wird ausgeführt wenn der User gewinnt oder auf Neues Spiel klickt
+        """
         self.counter = 0
         self.model.set_offen(15)
         self.print_random_numbers()
         self.repaint_ui()
 
     def richtig(self, btn):
+        """
+        Methode wird ausgeführt wenn die Eingabe richtig war
+        """
         btn.setEnabled(False)
         self.model.set_offen(self.model.get_offen() - 1)
         self.model.set_korrekt(self.model.get_korrekt() + 1)
@@ -67,6 +85,9 @@ class Controller(QtWidgets.QWidget):
         self.repaint_ui()
 
     def falsch(self):
+        """
+        Methode wird ausgeführt wenn die Eingabe falsche war
+        """
         self.model.set_falsch(self.model.get_falsch() + 1)
         self.model.set_gesamt(self.model.get_falsch() + self.model.get_korrekt())
         self.repaint_ui()
