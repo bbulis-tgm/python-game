@@ -5,7 +5,7 @@ import sys
 class Game(QtWidgets.QWidget):
     def __init__(self):
         super(Game, self).__init__()
-        uic.loadUi('gui.ui', self)
+        self.form = uic.loadUi('gui.ui', self)
 
 
 if __name__ == "__main__":
