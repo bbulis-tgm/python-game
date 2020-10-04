@@ -38,16 +38,8 @@ class Model:
     def get_spiele(self) -> int:
         return self.spiele
 
-    offen = property(get_offen, set_offen)
-    korrekt = property(get_korrekt, set_korrekt)
-    falsch = property(get_falsch, set_falsch)
-    gesamt = property(get_gesamt, set_gesamt)
-    spiele = property(get_spiele, set_spiele)
-
     def get_game_numbers(self) -> list:
         return self.game_numbers
 
     def set_game_numbers(self, game_numbers):
         self.game_numbers = game_numbers
-
-    game_numbers = property(get_game_numbers, set_game_numbers)
