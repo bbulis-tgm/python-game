@@ -71,6 +71,9 @@ class Controller(QtWidgets.QWidget):
         """
         self.counter = 0
         self.model.set_offen(15)
+        self.model.set_gesamt(0)
+        self.model.set_falsch(0)
+        self.model.set_korrekt(0)
         self.print_random_numbers()
         self.repaint_ui()
 
